@@ -2,7 +2,7 @@
 
 This project use solidity hardhat running on local.
 
-Each file in contracts folder can see result in the folder scripts:
+Each file in contracts folder can see result compile function in the folder scripts:
 
 ```shell
 npx hardhat run scripts/testCustomError.js
@@ -10,3 +10,10 @@ npx hardhat run scripts/testCustomError.js
 
 result
 ![custome error](https://github.com/Thanasornsawan/solidity-learning/blob/main/result.PNG?raw=true)
+
+Each file in contracts folder can check contract work correctly as function should do in the folder test:
+```shell
+npx hardhat test
+```
+result
+![custome error](https://github.com/Thanasornsawan/solidity-learning/blob/main/hello.PNG?raw=true)
