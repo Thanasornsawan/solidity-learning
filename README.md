@@ -1,6 +1,10 @@
 # My solidity learning
 
-This project use solidity hardhat running on local.
+This project use solidity hardhat and openzeppelin running on local.
+
+```shell
+npm install --save-dev @openzeppelin/contracts
+```
 
 Each file in contracts folder can see result compile function in the folder scripts:
 
