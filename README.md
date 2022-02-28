@@ -22,3 +22,18 @@ npx hardhat test
 ```
 result
 ![custome error](https://github.com/Thanasornsawan/solidity-learning/blob/main/hello.PNG?raw=true)
+
+running project on local hardhat network
+
+first terminal try this command
+```shell
+npx hardhat node
+```
+
+Second terminal try this command
+```shell
+npx hardhat run --network localhost scripts/testCourse.js
+```
+
+Back to the first terminal, you will see gas execution of each functions in contract.
+![local result](https://github.com/Thanasornsawan/solidity-learning/blob/main/local1.PNG?raw=true)

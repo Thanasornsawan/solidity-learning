@@ -8,6 +8,7 @@ import "hardhat/console.sol";
 
 contract Courses is Ownable{
     uint[] public cart;
+    mapping(address => uint) balance;
     using Counters for Counters.Counter;
     Counters.Counter private _courseId;
 
@@ -18,6 +19,7 @@ contract Courses is Ownable{
     }
 
     mapping (uint => Course) public courses;
+    event transferSuccess (address indexed sender, address indexed reciever, uint amount);
 
     function addCourse(uint _price, string memory _title) public onlyOwner{
         uint256 newCourseId = _courseId.current();
@@ -29,21 +31,6 @@ contract Courses is Ownable{
         Course storage course = courses[1];
         course.title = _title;
         course.price = _price;
-    }
-
-    function chooseCoursesToBuy(uint index) public{
-        cart.push(index); //put id of course
-    }
-
-    function viewCart() public view returns (uint[] memory){
-        return cart;
-    }
-
-    function removeCourseToBuy(uint index) public{
-        //move index to last index for pop
-        //solidity cannot use "delete cart[1]" because array lenght not change from immutable
-        cart[index] = cart[cart.length - 1];
-        cart.pop();
     }
 
     function getCourseById(uint index) public view returns(uint _ID, uint _price, string memory title){
@@ -62,4 +49,56 @@ contract Courses is Ownable{
       }
       return id;
   }
+
+//function about cart
+
+ function chooseCoursesToBuy(uint index) public{
+        cart.push(index); //put id of course
+    }
+
+    function viewCart() public view returns (uint[] memory){
+        return cart;
+    }
+
+    function removeCourseToBuy(uint index) public{
+        //move index to last index for pop
+        //solidity cannot use "delete cart[1]" because array lenght not change from immutable
+        cart[index] = cart[cart.length - 1];
+        cart.pop();
+    }
+
+    function calculateTotalPrice() view public returns (uint _totalPrice) {
+        uint totalPrice = 0;
+        //cart have index [1,2] ,loop start from uint i=0, loop 0,1
+        for(uint i=0; i<cart.length; i++) {
+            (, uint _price,) = getCourseById(cart[i]);
+            totalPrice += _price;
+        }
+        return totalPrice;
+    }
+
+    function payCourse(address recipient) public {
+        uint amount = calculateTotalPrice();
+        require(amount != 0, "Please choose courses to buy first!!");
+        require(balance[msg.sender]>= amount, "Your balance is insufficient");
+        require(msg.sender != recipient, "Do not transfer money back to your address");
+        _transfer(msg.sender, recipient, amount);
+        emit transferSuccess(msg.sender, recipient, amount);
+    }
+
+    function _transfer(address from, address to, uint amount) private {
+        balance[from] -= amount;
+        balance[to] += amount;
+    }
+
+    //Additional function for deposit money to address (not relate to course)
+    function addBalance(uint _toAdd) public returns(uint){
+        balance[msg.sender] = balance[msg.sender] + _toAdd;
+        return balance[msg.sender];
+    }
+
+    function getBalance()public view returns(uint) {
+        return balance[msg.sender];
+    }
+
 }
