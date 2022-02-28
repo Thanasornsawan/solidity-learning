@@ -34,6 +34,8 @@ Second terminal try this command
 ```shell
 npx hardhat run --network localhost scripts/testCourse.js
 ```
+![local result2](https://github.com/Thanasornsawan/solidity-learning/blob/main/local2.PNG?raw=true)
 
 Back to the first terminal, you will see gas execution of each functions in contract.
-![local result](https://github.com/Thanasornsawan/solidity-learning/blob/main/local1.PNG?raw=true)
+
+![local result1](https://github.com/Thanasornsawan/solidity-learning/blob/main/local1.PNG?raw=true)
