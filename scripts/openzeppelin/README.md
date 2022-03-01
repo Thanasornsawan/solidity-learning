@@ -19,6 +19,6 @@ npx hardhat test
 
 It will show warning about node module as this picture.
 
-![open result](https://github.com/Thanasornsawan/solidity-learning/tree/main/scripts/openzeppelin/result.PNG?raw=true)
+![open result](https://github.com/Thanasornsawan/solidity-learning/blob/main/scripts/openzeppelin/result.PNG?raw=true)
 
 I recommend as a choice for whatever you pleasure to use it because it just warning not something break.
