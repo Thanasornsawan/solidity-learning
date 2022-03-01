@@ -1,6 +1,8 @@
 # My solidity learning
 
-This project use solidity hardhat and openzeppelin running on local.
+This project is my personal practice use solidity hardhat and chai testing.
+ 
+##### Running on local.
 
 ```shell
 npm install --save-dev @openzeppelin/contracts
@@ -23,7 +25,7 @@ npx hardhat test
 result
 ![custome error](https://github.com/Thanasornsawan/solidity-learning/blob/main/hello.PNG?raw=true)
 
-running project on local hardhat network
+##### Running project on local hardhat network
 
 first terminal try this command
 ```shell
@@ -63,10 +65,13 @@ gasReporter: {
 ![gas result1](https://github.com/Thanasornsawan/solidity-learning/blob/main/testgas1.PNG?raw=true)
 
 Turn off hardhat gas reporter
+
+```javascript
 gasReporter: {
     enabled: (process.env.REPORT_GAS) ? false : true,
 }
+```
 
 ![gas result2](https://github.com/Thanasornsawan/solidity-learning/blob/main/testgas2.PNG?raw=true)
 
-Setting currency for gas reporter is optional, you can get API KEY from (coinmarketcap pro)[https://pro.coinmarketcap.com/signup/] and then set credential 'COINMARKETCAP_API_KEY' in .env file
+Setting currency for gas reporter is optional, you can get API KEY from (coinmarketcap pro)[https://pro.coinmarketcap.com/signup/] and then set credential **COINMARKETCAP_API_KEY** in .env file
