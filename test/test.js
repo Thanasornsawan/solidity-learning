@@ -21,7 +21,7 @@ describe("HelloWorld contract", function () {
   });
 
   describe("Course contract", function () {
-    it("function viewCart, should return 1,2", async function () {
+    it("function viewCart(), should return 1,2", async function () {
       const courseContractFactory = await ethers.getContractFactory("Courses");
       const courseContract = await courseContractFactory.deploy();
       const expected = [1,2];

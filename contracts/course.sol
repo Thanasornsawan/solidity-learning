@@ -21,6 +21,7 @@ contract Courses is Ownable{
 
     mapping (uint => Course) public courses;
     event transferSuccess (address indexed sender, address indexed reciever, uint amount);
+    event balanceAdded (uint amount, address indexed depositTo);
 
     function addCourse(uint _price, string memory _title) public onlyOwner{
         uint256 newCourseId = _courseId.current();
@@ -32,6 +33,7 @@ contract Courses is Ownable{
         Course storage course = courses[1];
         course.title = _title;
         course.price = _price;
+
     }
 
     function getCourseById(uint index) public view returns(uint _ID, uint _price, string memory title){
@@ -39,6 +41,7 @@ contract Courses is Ownable{
         _ID = course._id;
         _price = course.price;
         title = course.title;
+        return (_ID, _price, title);
     }
 
     function getAllCourses() public view returns (Course[] memory){
@@ -80,7 +83,7 @@ contract Courses is Ownable{
         return totalPrice;
     }
 
-    function payCourse(address recipient) public returns(bool success) {
+    function payCourse(address recipient) public returns(bool) {
         uint amount = calculateTotalPrice();
         require(amount != 0, "Please choose courses to buy first!!");
         require(balance[msg.sender]>= amount, "Your balance is insufficient");
@@ -105,5 +108,11 @@ contract Courses is Ownable{
     function getBalance()public view returns(uint) {
         return balance[msg.sender];
     }
+
+    function deposit() public payable returns(uint){
+        balance[msg.sender] += msg.value;
+        emit balanceAdded(msg.value, msg.sender);
+        return balance[msg.sender];
+    }    
 
 }
