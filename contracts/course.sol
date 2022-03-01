@@ -11,6 +11,7 @@ contract Courses is Ownable{
     mapping(address => uint) balance;
     using Counters for Counters.Counter;
     Counters.Counter private _courseId;
+    bool isPaid = false;
 
       struct Course{
         uint price;
@@ -52,19 +53,21 @@ contract Courses is Ownable{
 
 //function about cart
 
- function chooseCoursesToBuy(uint index) public{
+ function chooseCoursesToBuy(uint index) public returns (uint[] memory){
         cart.push(index); //put id of course
+        return cart;
     }
 
     function viewCart() public view returns (uint[] memory){
         return cart;
     }
 
-    function removeCourseToBuy(uint index) public{
+    function removeCourseToBuy(uint index) public returns (uint[] memory){
         //move index to last index for pop
         //solidity cannot use "delete cart[1]" because array lenght not change from immutable
         cart[index] = cart[cart.length - 1];
         cart.pop();
+        return cart;
     }
 
     function calculateTotalPrice() view public returns (uint _totalPrice) {
@@ -77,13 +80,15 @@ contract Courses is Ownable{
         return totalPrice;
     }
 
-    function payCourse(address recipient) public {
+    function payCourse(address recipient) public returns(bool success) {
         uint amount = calculateTotalPrice();
         require(amount != 0, "Please choose courses to buy first!!");
         require(balance[msg.sender]>= amount, "Your balance is insufficient");
         require(msg.sender != recipient, "Do not transfer money back to your address");
         _transfer(msg.sender, recipient, amount);
+        isPaid = true;
         emit transferSuccess(msg.sender, recipient, amount);
+        return isPaid;
     }
 
     function _transfer(address from, address to, uint amount) private {
