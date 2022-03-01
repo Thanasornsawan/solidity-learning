@@ -1,16 +1,6 @@
-var chai = require("chai");
-var web3 = require('web3');
-const BN = web3.utils.BN;
-const chaiBN = require('chai-bn')(BN);
-chai.use(chaiBN);
-const { solidity } = require("ethereum-waffle");
-chai.use(solidity);
-
-var deepEql = require("deep-eql");
-var chaiAsPromised = require("chai-as-promised");
-chai.use(chaiAsPromised);
-
-const expect = chai.expect;
+const { expect } = require("chai");
+const { ethers } = require("hardhat");
+const { deepEql } = require("deep-eql");
 
 describe("HelloWorld contract", function () {
     it("Should return hello world", async function () {
@@ -53,6 +43,9 @@ describe("HelloWorld contract", function () {
         expect(totalPrice).to.be.not.null;
         expect(totalPrice).to.be.not.NaN;
         //totalPrice return BigNumber { value: "300" }
+        expect(totalPrice.toNumber()).to.be.not.undefined;
+        expect(totalPrice.toNumber()).to.be.not.null;
+        expect(totalPrice.toNumber()).to.be.not.equal(0);
         expect(totalPrice.toNumber()).to.equal(300);
       });
 
