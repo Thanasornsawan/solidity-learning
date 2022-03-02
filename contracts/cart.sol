@@ -65,6 +65,7 @@ contract Cart is Courses, Payment {
         isPaid = true;
         emit transferSuccess(msg.sender, recipient, amount);
         return isPaid;
+        
     }
 
     function _transfer(address from, address to, uint amount) private {

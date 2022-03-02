@@ -49,6 +49,7 @@ const main = async () => {
     for (const event of payCourseEvent.events) {
         console.log(`Event ${event.event} with args ${event.args}`);
     }
+    
     //------------------------------------------------------------------------------------------------
     const getOwnerBalance = await paymentContract.getBalance();
     console.log("Teacher balance: " + getOwnerBalance.toString());

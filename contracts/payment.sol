@@ -21,5 +21,4 @@ event balanceAdded (uint amount, address indexed depositTo);
         emit balanceAdded(msg.value, msg.sender);
         return balance[msg.sender];
     }    
-
 }
