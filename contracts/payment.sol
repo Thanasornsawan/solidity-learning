@@ -1,6 +1,11 @@
 // SPDX-License-Identifier: MIT
 
 pragma solidity ^0.8.0;
+import "hardhat/console.sol";
+
+interface PaymentInterface {
+    function getBalance() view external returns(uint);
+}
 
 contract Payment{
 

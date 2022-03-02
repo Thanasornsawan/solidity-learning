@@ -5,14 +5,6 @@ pragma solidity ^0.8.0;
 import "./course.sol";
 import "./payment.sol";
 
-interface CourseInterface {
-    function getCourseById(uint index) view external returns(uint _ID, uint _price, string memory title);
-}
-
-interface PaymentInterface {
-    function getBalance() external view returns(uint);
-}
-
 contract Cart is Courses, Payment {
  uint[] public cart;  
  address courseAddress;
@@ -59,13 +51,14 @@ contract Cart is Courses, Payment {
         if (recipient == address(0)){revert No_Recipient();}
         if (msg.sender == recipient) {revert Invalid_Address();}
         console.log(p.getBalance());
+        console.log(msg.sender);
         if (amount == 0) {revert Empty_Amount();}
         if (balance[msg.sender]< amount) {revert Low_Balance();}
         _transfer(msg.sender, recipient, amount);
         isPaid = true;
         emit transferSuccess(msg.sender, recipient, amount);
         return isPaid;
-        
+
     }
 
     function _transfer(address from, address to, uint amount) private {

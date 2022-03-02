@@ -15,6 +15,8 @@ const main = async () => {
     console.log("Course contract deployed to:", courseContract.address);
     console.log("Payment contract deployed to:", paymentContract.address);
     console.log("Cart contract deployed to:", cartContract.address);
+    console.log("Owner address:", owner.address);
+    console.log("Student address:", std1.address);
 
     let newCourse = await courseContract.addCourse(200, "course1");
         await courseContract.addCourse(300, "course2");
@@ -49,7 +51,7 @@ const main = async () => {
     for (const event of payCourseEvent.events) {
         console.log(`Event ${event.event} with args ${event.args}`);
     }
-    
+
     //------------------------------------------------------------------------------------------------
     const getOwnerBalance = await paymentContract.getBalance();
     console.log("Teacher balance: " + getOwnerBalance.toString());

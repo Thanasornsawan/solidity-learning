@@ -11,6 +11,10 @@ error Empty_Amount();
 error Low_Balance();
 error Invalid_Address();
 
+interface CourseInterface {
+    function getCourseById(uint index) view external returns(uint _ID, uint _price, string memory title);
+}
+
 contract Courses is Ownable{
     
     using Counters for Counters.Counter;
