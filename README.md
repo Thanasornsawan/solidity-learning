@@ -37,7 +37,7 @@ npx hardhat coverage
 
 ![coverage result](https://github.com/Thanasornsawan/solidity-learning/blob/main/photos/cover.PNG?raw=true)
 
-You can turn on and off hardhat gas reporter plugin by change at hardhat.config.js and see gas result compre with currency when use command:
+You can turn on and off hardhat gas reporter plugin by change at hardhat.config.js and see gas result compare with currency when use command:
 
 ```shell
 npx hardhat test
