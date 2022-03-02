@@ -63,3 +63,5 @@ gasReporter: {
 ![gas result2](https://github.com/Thanasornsawan/solidity-learning/blob/main/photos/testgas2.PNG?raw=true)
 
 Setting currency for gas reporter is optional, you can get API KEY from (coinmarketcap pro)[https://pro.coinmarketcap.com/signup/] and then set credential **COINMARKETCAP_API_KEY** in .env file.
+
+You can view another solution of test.js by openzeppelin-testhelper from [here](https://github.com/Thanasornsawan/solidity-learning/tree/main/scripts/openzeppelin)
