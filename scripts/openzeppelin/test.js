@@ -32,11 +32,16 @@ const course= artifacts.require('Courses');
         let chooseCourses = await this.course.chooseCoursesToBuy(0);
         await this.course.chooseCoursesToBuy(1);
         const totalPrice = await this.course.calculateTotalPrice();
+        //totalPrice return BigNumber { value: "300" }
+        //need to make expected price to be BigNumber for compare
+        //Avoid to use .toNumber() with BigNumber to cause overflow on javascript
+        const expected = hre.ethers.BigNumber.from("300");
+        const zero = hre.ethers.BigNumber.from("0");
         expect(totalPrice).to.be.not.undefined;
         expect(totalPrice).to.be.not.null;
         expect(totalPrice).to.be.not.NaN;
-        //totalPrice return BigNumber { value: "300" }
-        expect(totalPrice.toNumber()).to.equal(300);
+        expect(totalPrice).to.be.not.equal(zero);
+        expect(totalPrice).to.equal(expected);
       });
 
   });

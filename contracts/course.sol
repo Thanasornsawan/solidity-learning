@@ -6,6 +6,11 @@ import "@openzeppelin/contracts/utils/Counters.sol";
 import "@openzeppelin/contracts/access/Ownable.sol";
 import "hardhat/console.sol";
 
+error No_Recipient();
+error Empty_Amount();
+error Low_Balance();
+error Invalid_Address();
+
 contract Courses is Ownable{
     uint[] public cart;
     mapping(address => uint) balance;
@@ -83,11 +88,13 @@ contract Courses is Ownable{
         return totalPrice;
     }
 
-    function payCourse(address recipient) public returns(bool) {
+    function payCourse(address _recipient) public returns(bool) {
         uint amount = calculateTotalPrice();
-        require(amount != 0, "Please choose courses to buy first!!");
-        require(balance[msg.sender]>= amount, "Your balance is insufficient");
-        require(msg.sender != recipient, "Do not transfer money back to your address");
+        address recipient = _recipient;
+        if (recipient == address(0)){revert No_Recipient();}
+        if (msg.sender == recipient) {revert Invalid_Address();}
+        if (amount == 0) {revert Empty_Amount();}
+        if (balance[msg.sender]< amount) {revert Low_Balance();}
         _transfer(msg.sender, recipient, amount);
         isPaid = true;
         emit transferSuccess(msg.sender, recipient, amount);
