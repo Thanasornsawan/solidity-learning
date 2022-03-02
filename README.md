@@ -24,7 +24,7 @@ npx hardhat run scripts/testCourse.js
 
 Back to the first terminal that have hardhat node, it will show gas execution all of contract.
 
-![local result1](https://github.com/Thanasornsawan/solidity-learning/blob/main/photos/local1.PNG?raw=true)
+![local result1](https://github.com/Thanasornsawan/solidity-learning/blob/main/photos/local3.PNG?raw=true)
 
 If the function fall to the custom error in solidity,it will shows like this picture.
 
