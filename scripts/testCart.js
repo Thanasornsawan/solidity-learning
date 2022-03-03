@@ -8,8 +8,13 @@ const main = async () => {
     const cartContract = await cartContractFactory.deploy(courseContract.address);
     await cartContract.deployed();
 
+    const examContractFactory = await hre.ethers.getContractFactory('Exam');
+    const examContract = await examContractFactory.deploy();
+    await examContract.deployed();
+
     console.log("Course contract deployed to:", courseContract.address);
     console.log("Cart contract deployed to:", cartContract.address);
+    console.log("Exam contract deployed to:", examContract.address);
     console.log("Owner address:", owner.address);
     console.log("Student address:", std1.address);
 
@@ -75,6 +80,11 @@ const main = async () => {
     const getAllStudent = await cartContract.getAllStudents();
     console.log("All Students address: ");
     console.log(getAllStudent);
+
+    //-----------------------------------------------------------------------------
+    const testExamStatus = await examContract.setComplete();
+    const getExamStatus = await examContract.getExamStatus();
+    console.log(getExamStatus);
 };
 
 const runMain = async () => {
