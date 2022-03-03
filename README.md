@@ -46,6 +46,7 @@ npm install
   - [Usage](#usage)
     - [Running project with hardhat](#running-project-with-hardhat)
     - [Running the tests](#running-the-tests)
+  - [Todo on this project](#todo-on-this-project)
   - [Authors](#authors)
 
 ## Getting Started
@@ -129,6 +130,15 @@ gasReporter: {
 ![gas result4](https://github.com/Thanasornsawan/solidity-learning/blob/dev/photos/testgas4.PNG?raw=true)
 
 You can view another solution of test.js by openzeppelin-testhelper from [here](https://github.com/Thanasornsawan/solidity-learning/tree/main/scripts/openzeppelin)
+
+## Todo on this project
+
+- [ ] Integrate course contract with exam contract
+- [ ] Mapping status exam with students
+- [ ] Host NFT on IPFS
+- [ ] Giveaway NFT to students who complete course
+- [ ] Random giveaway ERC-20 token to students who pass exam
+- [ ] Integrate exam topic from any api chainlink oracle 
 
 ## Authors
 
