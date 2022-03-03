@@ -91,6 +91,7 @@ contract Cart is Courses{
         return isPaid[msg.sender][receiver];
     }
 
+    //addMyCourse when student complete payment
     function addMyCourse(address _student) private {
         uint[] memory courseID = viewCart();
         myCourse[_student] = courseID;
@@ -100,6 +101,7 @@ contract Cart is Courses{
         }
     }
 
+    //return course id that student already paid, this course id can use for loop in other function
     function getMyCourse() view public returns(uint[] memory){
         return myCourse[msg.sender];
     }
