@@ -9,7 +9,7 @@ You will learn about struct, array, map, inherit, custom error and so on from th
 /contracts
 	course.sol
 	cart.sol
-  exam.sol
+  	exam.sol
 ```
 *I currently update this project everyday on branch dev and remain branch main as stable version.*
 
@@ -135,6 +135,7 @@ You can view another solution of test.js by openzeppelin-testhelper from [here](
 
 - [ ] Integrate course contract with exam contract
 - [ ] Mapping status exam with students
+- [ ] Make the proxy contract for deploy on test network
 - [ ] Host NFT on IPFS
 - [ ] Giveaway NFT to students who complete course
 - [ ] Random giveaway ERC-20 token to students who pass exam
