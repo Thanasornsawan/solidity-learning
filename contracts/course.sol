@@ -27,30 +27,34 @@ contract Courses is Ownable{
         uint price;
         string title;
         uint256 _id;
+        bool exam;
     }
 
     mapping (uint => Course) public courses;
     event transferSuccess (address indexed sender, address indexed reciever, uint amount);
 
-    function addCourse(uint _price, string memory _title) public onlyOwner{
+    //calldata save gas more than memory
+    function addCourse(uint _price, string calldata _title) public onlyOwner {
         uint256 newCourseId = _courseId.current();
         _courseId.increment();
-        courses[newCourseId] = Course(_price, _title, newCourseId);
+        courses[newCourseId] = Course(_price, _title, newCourseId, false);
     }
 
-    function updateDeatailCourse(string memory _title, uint _price) public returns (bool success) {
-        Course storage course = courses[1];
+    function updateDeatailCourse(uint _index, string calldata _title, uint _price, bool _exam) public onlyOwner returns (Course memory) {
+        Course storage course = courses[_index];
         course.title = _title;
         course.price = _price;
-        return true;
+        course.exam = _exam;
+        return course;
     }
 
-    function getCourseById(uint index) view external returns(uint _ID, uint _price, string memory title){
-        Course memory course = courses[index];
+    function getCourseById(uint index) view external returns(uint _ID, uint _price, string memory _title, bool _exam){
+        Course storage course = courses[index];
         _ID = course._id;
         _price = course.price;
-        title = course.title;
-        return (_ID, _price, title);
+        _title = course.title;
+        _exam = course.exam;
+        return (_ID, _price, _title, _exam);
     }
 
     function getAllCourses() public view returns (Course[] memory){

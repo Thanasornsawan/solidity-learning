@@ -4,7 +4,7 @@ require("hardhat-gas-reporter");
 //uncomment this two line if you want to use openzeppelin test-helper in scripts/openzeppelin/test.js
 //require("@nomiclabs/hardhat-web3");
 //require("@nomiclabs/hardhat-truffle5");
-require("@nomiclabs/hardhat-ethers");
+//There's no need for require("@nomiclabs/hardhat-ethers"), as @nomiclabs/hardhat-waffle already does it.
 require('@openzeppelin/hardhat-upgrades');
 require("dotenv").config();
 

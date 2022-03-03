@@ -17,13 +17,12 @@ const main = async () => {
         await courseContract.addCourse(300, "course2");
         await courseContract.addCourse(100, "course3");
     let getAllCourse = await courseContract.getAllCourses();
-    let up = await courseContract.updateDeatailCourse("change title naa", 150);
+    let up = await courseContract.updateDeatailCourse(1,"change title naa", 150, false);
     let getCourseById = await courseContract.getCourseById(1);
-    //console.log(getCourseById);
 
-    let selectCourse = await cartContract.chooseCoursesToBuy(0);
-        selectCourse = await cartContract.chooseCoursesToBuy(1);
-        selectCourse = await cartContract.chooseCoursesToBuy(2);
+    let selectCourse = await cartContract.connect(std1).chooseCoursesToBuy(0);
+        selectCourse = await cartContract.connect(std1).chooseCoursesToBuy(1);
+        selectCourse = await cartContract.connect(std1).chooseCoursesToBuy(2);
     //get transaction return value from function chooseCourseToBuy -------
     const trace = await network.provider.send("debug_traceTransaction", [selectCourse.hash])
     const [cart] = ethers.utils.defaultAbiCoder.decode(
@@ -31,8 +30,8 @@ const main = async () => {
         `0x${trace.returnValue}`
     )
     console.log(`cart: ${cart}`);
-    const removeSelectCourse = await cartContract.removeCourseToBuy(1);
-    const viewCart = await cartContract.viewCart();
+    const removeSelectCourse = await cartContract.connect(std1).removeCourseToBuy(1);
+    const viewCart = await cartContract.connect(std1).viewCart();
     console.log("Final cart: " + viewCart.toString());
 
     let totalPrice = await cartContract.calculateTotalPrice();
@@ -48,8 +47,12 @@ const main = async () => {
     for (const event of payCourseEvent.events) {
         console.log(`Event ${event.event} with args ${event.args}`);
     }
-
     //------------------------------------------------------------------------------------------------
+    const checkStatePaid = await cartContract.connect(std1).getStatusPaid(owner.address);
+    console.log(`paid status to  ${owner.address}: `+ checkStatePaid.toString());
+    const checkCart = await cartContract.connect(std1).viewCart();
+    checkCart.length == 0 ? console.log("cart status: empty"): console.log("cart status: " + checkCart.toString());
+    
     const getOwnerBalance = await cartContract.getBalance();
     console.log("Teacher balance: " + getOwnerBalance.toString());
     const getStdBalance2 = await cartContract.connect(std1).getBalance();

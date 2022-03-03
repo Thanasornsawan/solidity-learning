@@ -7,8 +7,8 @@ import "./course.sol";
 contract Cart is Courses{
  uint[] public cart;  
  address courseAddress; 
- bool isPaid = false;
  mapping(address => uint) internal balance;
+ mapping(address => mapping(address=>bool)) public isPaid;
  event balanceAdded (uint amount, address indexed depositTo);
 
     constructor(address _courseAddress) {
@@ -32,12 +32,17 @@ contract Cart is Courses{
         return cart;
     }
 
+    function clearCart() public returns (uint[] memory) {
+        delete cart;
+        return cart;
+    }
+
     function calculateTotalPrice() public view returns (uint _totalPrice) {
         CourseInterface c = CourseInterface(courseAddress);
         uint totalPrice = 0;
         //cart have index [1,2] ,loop start from uint i=0, loop 0,1
         for(uint i=0; i<cart.length; i++) {
-            (, uint _price,) = c.getCourseById(cart[i]);
+            (,uint _price,) = c.getCourseById(cart[i]);
             totalPrice += _price;
         }
         return totalPrice;
@@ -51,9 +56,10 @@ contract Cart is Courses{
         if (amount == 0) {revert Empty_Amount();}
         if (balance[msg.sender]< amount) {revert Low_Balance();}
         _transfer(msg.sender, recipient, amount);
-        isPaid = true;
+        isPaid [msg.sender][recipient] = true;
+        clearCart();
         emit transferSuccess(msg.sender, recipient, amount);
-        return isPaid;
+        return true;
 
     }
 
@@ -62,12 +68,12 @@ contract Cart is Courses{
         balance[to] += amount;
     }
 
-    function addBalance(uint _toAdd) external returns(uint){
+    function addBalance(uint _toAdd) public returns(uint){
         balance[msg.sender] = balance[msg.sender] + _toAdd;
         return balance[msg.sender];
     }
 
-    function getBalance() external view returns(uint) {
+    function getBalance() public view returns(uint) {
         return balance[msg.sender];
     }
 
@@ -76,4 +82,8 @@ contract Cart is Courses{
         emit balanceAdded(msg.value, msg.sender);
         return balance[msg.sender];
     }    
+
+    function getStatusPaid(address receiver) public view returns(bool) {
+        return isPaid[msg.sender][receiver];
+    }
 }
