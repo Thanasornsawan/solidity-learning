@@ -7,7 +7,7 @@ You will learn about struct, array, map, inherit, event and so on from this proj
 
 *I currently update this project everyday on branch dev and remain branch main as stable version.*
 
-## Pre-installed## Prerequisites
+## Prerequisites
 
 This project requires NodeJS (version 8 or later) and NPM.
 [Node](http://nodejs.org/) and [NPM](https://npmjs.org/) are really easy to install.
@@ -33,7 +33,7 @@ npm install
 ## Table of contents
 
 - [Solidity Learning](#solidity-learning)
-  - [Pre-installed## Prerequisites](#pre-installed-prerequisites)
+  - [Prerequisites](#prerequisites)
   - [Table of contents](#table-of-contents)
   - [Getting Started](#getting-started)
   - [Installation](#installation)
