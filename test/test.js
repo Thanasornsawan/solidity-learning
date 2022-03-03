@@ -5,8 +5,8 @@ const { deepEql } = require("deep-eql");
   describe("Course and Cart contract", function () {
     
     before(async function () {
-      this.Course = await ethers.getContractFactory('Courses');
-      this.Cart = await ethers.getContractFactory('Cart');
+      this.Course = await hre.ethers.getContractFactory('Courses');
+      this.Cart = await hre.ethers.getContractFactory('Cart');
     });
   
     beforeEach(async function () {

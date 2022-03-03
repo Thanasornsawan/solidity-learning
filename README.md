@@ -3,8 +3,13 @@
 
 # Solidity Learning
 > This project is for practice solidity with hardhat and testing contract with chai. The main contract is 'Courses' contract which only owner can create course and update.The other people will interact with 'Cart' contract which need to choose index of course to cart array and then make the payment of total price of courses in the cart.The 'Courses' contract will act as parent of 'Cart' contract.
-You will learn about struct, array, map, inherit, event and so on from this project.
+You will learn about struct, array, map, inherit, custom error and so on from this project.
 
+```markdown
+/contracts
+	course.sol
+	cart.sol
+```
 *I currently update this project everyday on branch dev and remain branch main as stable version.*
 
 ## Prerequisites
@@ -97,7 +102,7 @@ npx hardhat coverage
 
 ### Running the tests
 
-You can test the smart contract and view gas usage compare with currency on each testing function by hardhat gas reporter plugin. About setting currency for gas reporter is optional, you can get API KEY from (coinmarketcap pro)[https://pro.coinmarketcap.com/signup/] and then set credential *COINMARKETCAP_API_KEY* in .env file and then config the currency name in the hardhat.config.js.
+You can test the smart contract and view gas usage compare with currency on each testing function by hardhat gas reporter plugin. About setting currency for gas reporter is optional, you can get API KEY from (coinmarketcap pro)[https://pro.coinmarketcap.com/signup/] and then set credential *COINMARKETCAP_API_KEY* in .env file and then config the currency name in the `hardhat.config.js`.
 
 ```shell
 npx hardhat test
