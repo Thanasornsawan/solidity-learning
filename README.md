@@ -115,7 +115,7 @@ gasReporter: {
     enabled: (process.env.REPORT_GAS) ? true : false,
 }
 ```
-![gas result1](https://github.com/Thanasornsawan/solidity-learning/blob/main/photos/testgas3.PNG?raw=true)
+![gas result3](https://github.com/Thanasornsawan/solidity-learning/blob/dev/photos/testgas3.PNG?raw=true)
 
 Turn off hardhat gas reporter in the hardhat.config.js.
 
@@ -125,7 +125,7 @@ gasReporter: {
 }
 ```
 
-![gas result2](https://github.com/Thanasornsawan/solidity-learning/blob/main/photos/testgas4.PNG?raw=true)
+![gas result4](https://github.com/Thanasornsawan/solidity-learning/blob/dev/photos/testgas4.PNG?raw=true)
 
 You can view another solution of test.js by openzeppelin-testhelper from [here](https://github.com/Thanasornsawan/solidity-learning/tree/main/scripts/openzeppelin)
 
