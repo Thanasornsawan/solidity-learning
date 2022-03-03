@@ -9,6 +9,7 @@ You will learn about struct, array, map, inherit, custom error and so on from th
 /contracts
 	course.sol
 	cart.sol
+  exam.sol
 ```
 *I currently update this project everyday on branch dev and remain branch main as stable version.*
 
