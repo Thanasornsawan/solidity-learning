@@ -3,17 +3,12 @@ const main = async () => {
     const courseContractFactory = await hre.ethers.getContractFactory('Courses');
     const courseContract = await courseContractFactory.deploy();
     await courseContract.deployed();
-    
-    const paymentContractFactory = await hre.ethers.getContractFactory('Payment');
-    const paymentContract = await paymentContractFactory.deploy();
-    await paymentContract.deployed();
 
     const cartContractFactory = await hre.ethers.getContractFactory('Cart');
-    const cartContract = await cartContractFactory.deploy(courseContract.address, paymentContract.address);
+    const cartContract = await cartContractFactory.deploy(courseContract.address);
     await cartContract.deployed();
 
     console.log("Course contract deployed to:", courseContract.address);
-    console.log("Payment contract deployed to:", paymentContract.address);
     console.log("Cart contract deployed to:", cartContract.address);
     console.log("Owner address:", owner.address);
     console.log("Student address:", std1.address);
@@ -23,6 +18,8 @@ const main = async () => {
         await courseContract.addCourse(100, "course3");
     let getAllCourse = await courseContract.getAllCourses();
     let up = await courseContract.updateDeatailCourse("change title naa", 150);
+    let getCourseById = await courseContract.getCourseById(1);
+    //console.log(getCourseById);
 
     let selectCourse = await cartContract.chooseCoursesToBuy(0);
         selectCourse = await cartContract.chooseCoursesToBuy(1);
@@ -41,8 +38,8 @@ const main = async () => {
     let totalPrice = await cartContract.calculateTotalPrice();
     console.log("Total price to pay: " + totalPrice.toString());
 
-    const addStdBalance = await paymentContract.connect(std1).addBalance(1000);
-    const getStdBalance = await paymentContract.connect(std1).getBalance();
+    const addStdBalance = await cartContract.connect(std1).addBalance(1000);
+    const getStdBalance = await cartContract.connect(std1).getBalance();
     console.log("student balance: " + getStdBalance.toString());
     
     const payCourse = await cartContract.connect(std1).payCourse(owner.address);
@@ -53,18 +50,18 @@ const main = async () => {
     }
 
     //------------------------------------------------------------------------------------------------
-    const getOwnerBalance = await paymentContract.getBalance();
+    const getOwnerBalance = await cartContract.getBalance();
     console.log("Teacher balance: " + getOwnerBalance.toString());
-    const getStdBalance2 = await paymentContract.connect(std1).getBalance();
+    const getStdBalance2 = await cartContract.connect(std1).getBalance();
     console.log("student balance after payment: " + getStdBalance2.toString());
 
      //test method deposit involve with msg.value --------------------------------
-    const depositToOwner = await paymentContract.deposit({
+    const depositToOwner = await cartContract.deposit({
         from: owner.address,
         value: ethers.utils.parseUnits("100","wei")
     });
 
-    let getOwnerBalance2 = await paymentContract.getBalance();
+    let getOwnerBalance2 = await cartContract.getBalance();
       getOwnerBalance2 = ethers.utils.parseUnits(getOwnerBalance2.toString(),"wei");
       console.log("Teacher balance after deposit: " + getOwnerBalance2);
     //----------------------------------------------------------------------------

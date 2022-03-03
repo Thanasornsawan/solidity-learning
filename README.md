@@ -1,6 +1,64 @@
-# My solidity learning
+[![npm version](https://badge.fury.io/js/npm.svg)](https://badge.fury.io/js/npm)
+[![code style: prettier](https://img.shields.io/badge/code_style-prettier-ff69b4.svg?style=flat-square)](https://github.com/prettier/prettier)
 
-This project is my personal practice use solidity hardhat and chai testing.
+# Solidity Learning
+> This project is for practice solidity with hardhat and testing contract with chai. The main contract is 'Courses' contract which only owner can create course and update.The other people will interact with 'Cart' contract which need to choose index of course to cart array and then make the payment of total price of courses in the cart.The 'Courses' contract will act as parent of 'Cart' contract.
+You will learn about struct, array, map, inherit, event and so on from this project.
+
+*I currently update this project everyday on branch dev and remain branch main as stable version.*
+
+## Pre-installed## Prerequisites
+
+This project requires NodeJS (version 8 or later) and NPM.
+[Node](http://nodejs.org/) and [NPM](https://npmjs.org/) are really easy to install.
+To make sure you have them available on your machine,try running the following command.
+
+```sh
+$ npm -v && node -v
+8.3.1
+v16.14.0
+```
+
+Check solidity compiler version:
+```sh
+solcjs --version
+0.8.9+commit.e5eed63a.Emscripten.clang
+```
+
+Install dependencies listed in package.json:
+```sh
+npm install
+```
+
+## Table of contents
+
+- [Solidity Learning](#solidity-learning)
+  - [Pre-installed## Prerequisites](#pre-installed-prerequisites)
+  - [Table of contents](#table-of-contents)
+  - [Getting Started](#getting-started)
+  - [Installation](#installation)
+  - [Usage](#usage)
+    - [Running project with hardhat](#running-project-with-hardhat)
+    - [Running the tests](#running-the-tests)
+  - [Authors](#authors)
+
+## Getting Started
+
+These instructions will get you a copy of the project up and running on your local machine for development and testing purposes. See deployment for notes on how to deploy the project on a live system.
+
+## Installation
+
+**BEFORE YOU INSTALL:** please read the [prerequisites](#prerequisites)
+
+Start with cloning this repo on your local machine:
+
+```sh
+$ git clone https://github.com/Thanasornsawan/solidity-learning.git
+$ cd solidity-learning
+```
+## Usage
+
+### Running project with hardhat
 
 First terminal try this command:
 ```shell
@@ -11,20 +69,20 @@ npx hardhat node
 
 Second terminal try this command:
 ```shell
-npx hardhat run --network localhost scripts/testCourse.js
+npx hardhat run --network localhost scripts/testCart.js
 ```
-![node result2](https://github.com/Thanasornsawan/solidity-learning/blob/main/photos/node2.PNG?raw=true)
+![node result2](https://github.com/Thanasornsawan/solidity-learning/blob/main/photos/local4.PNG?raw=true)
 
-But if you want to run on local without hardhat network,just try this command:
+But if you want to run on local without hardhat network, just remove network option:
 ```shell
-npx hardhat run scripts/testCourse.js
+npx hardhat run scripts/testCart.js
 ```
 
-![local result2](https://github.com/Thanasornsawan/solidity-learning/blob/main/photos/local2.PNG?raw=true)
+![local result2](https://github.com/Thanasornsawan/solidity-learning/blob/main/photos/local1.PNG?raw=true)
 
 Back to the first terminal that have hardhat node, it will show gas execution all of contract.
 
-![local result1](https://github.com/Thanasornsawan/solidity-learning/blob/main/photos/local3.PNG?raw=true)
+![local result1](https://github.com/Thanasornsawan/solidity-learning/blob/main/photos/local5.PNG?raw=true)
 
 If the function fall to the custom error in solidity,it will shows like this picture.
 
@@ -37,13 +95,15 @@ npx hardhat coverage
 
 ![coverage result](https://github.com/Thanasornsawan/solidity-learning/blob/main/photos/cover.PNG?raw=true)
 
-You can turn on and off hardhat gas reporter plugin by change at hardhat.config.js and see gas result compare with currency when use command:
+### Running the tests
+
+You can test the smart contract and view gas usage compare with currency on each testing function by hardhat gas reporter plugin. About setting currency for gas reporter is optional, you can get API KEY from (coinmarketcap pro)[https://pro.coinmarketcap.com/signup/] and then set credential *COINMARKETCAP_API_KEY* in .env file and then config the currency name in the hardhat.config.js.
 
 ```shell
 npx hardhat test
 ```
 
-Turn on plugin hardhar gas reporter
+Turn on plugin hardhar gas reporter in the hardhat.config.js
 
 ```javascript
 gasReporter: {
@@ -52,7 +112,7 @@ gasReporter: {
 ```
 ![gas result1](https://github.com/Thanasornsawan/solidity-learning/blob/main/photos/testgas1.PNG?raw=true)
 
-Turn off hardhat gas reporter
+Turn off hardhat gas reporter in the hardhat.config.js.
 
 ```javascript
 gasReporter: {
@@ -62,6 +122,8 @@ gasReporter: {
 
 ![gas result2](https://github.com/Thanasornsawan/solidity-learning/blob/main/photos/testgas2.PNG?raw=true)
 
-Setting currency for gas reporter is optional, you can get API KEY from (coinmarketcap pro)[https://pro.coinmarketcap.com/signup/] and then set credential **COINMARKETCAP_API_KEY** in .env file.
-
 You can view another solution of test.js by openzeppelin-testhelper from [here](https://github.com/Thanasornsawan/solidity-learning/tree/main/scripts/openzeppelin)
+
+## Authors
+
+* **Thanasornsawan Varathanamongkolchai** - [Thanasornsawan](https://github.com/Thanasornsawan)

@@ -1,19 +1,18 @@
 // SPDX-License-Identifier: MIT
 
-pragma solidity ^0.8.0;
+pragma solidity 0.8.9;
 
 import "./course.sol";
-import "./payment.sol";
 
-contract Cart is Courses, Payment {
+contract Cart is Courses{
  uint[] public cart;  
- address courseAddress;
- address paymentAddress;
+ address courseAddress; 
  bool isPaid = false;
+ mapping(address => uint) internal balance;
+ event balanceAdded (uint amount, address indexed depositTo);
 
-    constructor(address _courseAddress, address _paymentAddress) {
+    constructor(address _courseAddress) {
         courseAddress = _courseAddress;
-        paymentAddress = _paymentAddress;
     }
 
     function chooseCoursesToBuy(uint index) public returns (uint[] memory){
@@ -46,12 +45,9 @@ contract Cart is Courses, Payment {
 
     function payCourse(address _recipient) public returns(bool) {
         uint amount = calculateTotalPrice();
-        PaymentInterface p = PaymentInterface(paymentAddress);
         address recipient = _recipient;
         if (recipient == address(0)){revert No_Recipient();}
         if (msg.sender == recipient) {revert Invalid_Address();}
-        console.log(p.getBalance());
-        console.log(msg.sender);
         if (amount == 0) {revert Empty_Amount();}
         if (balance[msg.sender]< amount) {revert Low_Balance();}
         _transfer(msg.sender, recipient, amount);
@@ -65,4 +61,19 @@ contract Cart is Courses, Payment {
         balance[from] -= amount;
         balance[to] += amount;
     }
+
+    function addBalance(uint _toAdd) external returns(uint){
+        balance[msg.sender] = balance[msg.sender] + _toAdd;
+        return balance[msg.sender];
+    }
+
+    function getBalance() external view returns(uint) {
+        return balance[msg.sender];
+    }
+
+    function deposit() public payable returns(uint){
+        balance[msg.sender] += msg.value;
+        emit balanceAdded(msg.value, msg.sender);
+        return balance[msg.sender];
+    }    
 }

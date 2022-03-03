@@ -2,22 +2,25 @@ const { expect } = require("chai");
 const { ethers } = require("hardhat");
 const { deepEql } = require("deep-eql");
 
-  describe("Course contract", function () {
+  describe("Course and Cart contract", function () {
     
     before(async function () {
       this.Course = await ethers.getContractFactory('Courses');
+      this.Cart = await ethers.getContractFactory('Cart');
     });
   
     beforeEach(async function () {
       this.course = await this.Course.deploy();
       await this.course.deployed();
+      this.cart = await this.Cart.deploy(this.course.address);
+      await this.cart.deployed();
     });
 
     it("viewCart() => should return 1,2", async function () {
         const expected = [1,2];
-        let chooseCoursesToBuy = await this.course.chooseCoursesToBuy(1);
-        await this.course.chooseCoursesToBuy(2);
-        const viewCourseID = await this.course.viewCart();
+        let chooseCoursesToBuy = await this.cart.chooseCoursesToBuy(1);
+        await this.cart.chooseCoursesToBuy(2);
+        const viewCourseID = await this.cart.viewCart();
         //Solidity numbers get converted to BigNumber instances because 
         //Javascript Number types cannot hold a full uint type.
         //So, you are getting an array of BigNumber instances.
@@ -28,9 +31,9 @@ const { deepEql } = require("deep-eql");
       it("calculateTotalPrice() => should return 300", async function () {
         let newCourse = await this.course.addCourse(100, "course1");
         await this.course.addCourse(200, "course2");
-        let chooseCourses = await this.course.chooseCoursesToBuy(0);
-        await this.course.chooseCoursesToBuy(1);
-        const totalPrice = await this.course.calculateTotalPrice();
+        let chooseCourses = await this.cart.chooseCoursesToBuy(0);
+        await this.cart.chooseCoursesToBuy(1);
+        const totalPrice = await this.cart.calculateTotalPrice();
         //totalPrice return BigNumber { value: "300" }
         //need to make expected price to be BigNumber for compare
         //Avoid to use .toNumber() with BigNumber to cause overflow on javascript
