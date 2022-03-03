@@ -21,7 +21,13 @@
     "hardhat": "^2.9.0",
     "hardhat-gas-reporter": "^1.0.8",
     "hardhat-tracer": "^1.0.0-alpha.6",
+    "jest": "^27.5.1",
     "solidity-coverage": "^0.7.20",
     "web3": "^1.7.0"
+  },
+  "scripts" : {
+    "test" : "jest",
+    "test:coverage": "jest --coverage",
+    "test:coveralls": "jest --coverage && coveralls < coverage/lcov.info",
   }
 }
