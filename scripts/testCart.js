@@ -49,7 +49,7 @@ const main = async () => {
     }
     //------------------------------------------------------------------------------------------------
     const checkStatePaid = await cartContract.connect(std1).getStatusPaid(owner.address);
-    console.log(`paid status to  ${owner.address}: `+ checkStatePaid.toString());
+    console.log(`paid status to address ${owner.address}: `+ checkStatePaid.toString());
     const checkCart = await cartContract.connect(std1).viewCart();
     checkCart.length == 0 ? console.log("cart status: empty"): console.log("cart status: " + checkCart.toString());
     
@@ -69,6 +69,12 @@ const main = async () => {
       console.log("Teacher balance after deposit: " + getOwnerBalance2);
     //----------------------------------------------------------------------------
 
+    const getMyCourse = await cartContract.connect(std1).getMyCourse();
+    console.log("My course ID: "+ getMyCourse.toString());
+
+    const getAllStudent = await cartContract.getAllStudents();
+    console.log("All Students address: ");
+    console.log(getAllStudent);
 };
 
 const runMain = async () => {

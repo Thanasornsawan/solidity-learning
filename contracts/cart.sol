@@ -8,6 +8,9 @@ contract Cart is Courses{
  uint[] public cart;  
  address courseAddress; 
  mapping(address => uint) internal balance;
+ mapping(address => uint[]) public myCourse;
+ mapping(address => bool) public inserted;
+ address [] public keys;
  mapping(address => mapping(address=>bool)) public isPaid;
  event balanceAdded (uint amount, address indexed depositTo);
 
@@ -56,6 +59,7 @@ contract Cart is Courses{
         if (amount == 0) {revert Empty_Amount();}
         if (balance[msg.sender]< amount) {revert Low_Balance();}
         _transfer(msg.sender, recipient, amount);
+        addMyCourse(msg.sender);
         isPaid [msg.sender][recipient] = true;
         clearCart();
         emit transferSuccess(msg.sender, recipient, amount);
@@ -86,4 +90,22 @@ contract Cart is Courses{
     function getStatusPaid(address receiver) public view returns(bool) {
         return isPaid[msg.sender][receiver];
     }
+
+    function addMyCourse(address _student) private {
+        uint[] memory courseID = viewCart();
+        myCourse[_student] = courseID;
+        if(!inserted[_student]) {
+            inserted[_student] = true;
+            keys.push(_student);
+        }
+    }
+
+    function getMyCourse() view public returns(uint[] memory){
+        return myCourse[msg.sender];
+    }
+
+    function getAllStudents() view public returns(address [] memory){
+        return keys;
+    }
+
 }
