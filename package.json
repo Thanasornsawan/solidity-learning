@@ -26,8 +26,6 @@
     "web3": "^1.7.0"
   },
   "scripts" : {
-    "test" : "jest",
-    "test:coverage": "jest --coverage",
-    "test:coveralls": "jest --coverage && coveralls < coverage/lcov.info",
+    "test" : "jest"
   }
 }
