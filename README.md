@@ -1,5 +1,6 @@
 [![npm version](https://badge.fury.io/js/npm.svg)](https://badge.fury.io/js/npm)
 [![code style: prettier](https://img.shields.io/badge/code_style-prettier-ff69b4.svg?style=flat-square)](https://github.com/prettier/prettier)
+![buidler](https://buidler.dev/buidler-plugin-badge.svg?1)
 
 # Solidity Learning
 > This project is for practice solidity with hardhat and testing contract with chai. The main contract is 'Courses' contract which only owner can create course and update.The other people will interact with 'Cart' contract which need to choose index of course to cart array and then make the payment of total price of courses in the cart.The 'Courses' contract will act as parent of 'Cart' contract.
