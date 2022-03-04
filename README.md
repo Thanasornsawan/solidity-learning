@@ -46,8 +46,8 @@ npm install
   - [Installation](#installation)
   - [Usage](#usage)
     - [Running project with hardhat](#running-project-with-hardhat)
-    - [Running the tests](#running-the-tests)
-    - [Running solhint validate all contract](#running-solhint-validate-all-contract)
+    - [Running hardhat test](#running-hardhat-test)
+    - [Running solhint validate all contracts](#running-solhint-validate-all-contracts)
   - [Todo on this project](#todo-on-this-project)
   - [Authors](#authors)
 
@@ -104,7 +104,7 @@ npx hardhat coverage
 
 ![coverage result](https://github.com/Thanasornsawan/solidity-learning/blob/main/photos/cover.PNG?raw=true)
 
-### Running the tests
+### Running hardhat test
 
 You can test the smart contract and view gas usage compare with currency on each testing function by hardhat gas reporter plugin. About setting currency for gas reporter is optional, you can get API KEY from (coinmarketcap pro)[https://pro.coinmarketcap.com/signup/] and then set credential *COINMARKETCAP_API_KEY* in .env file and then config the currency name in the `hardhat.config.js`.
 
@@ -133,13 +133,13 @@ gasReporter: {
 
 You can view another solution of test.js by openzeppelin-testhelper from [here](https://github.com/Thanasornsawan/solidity-learning/tree/main/scripts/openzeppelin)
 
-### Running solhint validate all contract
+### Running solhint validate all contracts
 
 ```shell
 solhint 'contracts/**/*.sol'
 ```
 
-![solhint](https://github.com/Thanasornsawan/solidity-learning/blob/dev/photos/solhint.PNG?raw=true)
+![solhint](https://github.com/Thanasornsawan/solidity-learning/blob/main/photos/solhint.PNG?raw=true)
 
 * Edit rule in file `.solhint.json` see [detail](https://github.com/protofire/solhint/blob/master/docs/rules.md)
 
