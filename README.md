@@ -1,5 +1,5 @@
 [![npm version](https://badge.fury.io/js/npm.svg)](https://badge.fury.io/js/npm)
-[![code style: prettier](https://img.shields.io/badge/code_style-prettier-ff69b4.svg?style=flat-square)](https://github.com/prettier/prettier)
+[![Solidity Learning](https://github.com/Thanasornsawan/solidity-learning/actions/workflows/workflow.yml/badge.svg)](https://github.com/Thanasornsawan/solidity-learning/actions/workflows/workflow.yml)
 ![buidler](https://buidler.dev/buidler-plugin-badge.svg?1)
 
 # Solidity Learning
