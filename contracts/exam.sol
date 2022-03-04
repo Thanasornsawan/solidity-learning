@@ -5,8 +5,8 @@ pragma solidity 0.8.9;
 contract Exam {
 
    enum ExamStatus{ waiting, retest, complete }
-   ExamStatus status;
-   ExamStatus constant defaultStatus = ExamStatus.waiting;
+   ExamStatus public status;
+   ExamStatus public constant DEFAULT_STATUS = ExamStatus.waiting;
 
     //status =1
    function setReTest() public {
@@ -24,6 +24,6 @@ contract Exam {
 
    //status =0
    function getDefaultStatus() public pure returns (uint) {
-      return uint(defaultStatus);
+      return uint(DEFAULT_STATUS);
    }
 }

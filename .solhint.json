@@ -3,6 +3,7 @@
   "rules": {
     "func-order": "off",
     "compiler-version": ["error", "^0.8.0"],
-    "func-visibility": ["warn", { "ignoreConstructors": true }]
+    "func-visibility": ["warn", { "ignoreConstructors": true }],
+    "contract-name-camelcase": "off"
   }
 }

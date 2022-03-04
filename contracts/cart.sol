@@ -6,13 +6,13 @@ import "./course.sol";
 
 contract Cart is Courses{
  uint[] public cart;  
- address courseAddress; 
+ address public courseAddress; 
  mapping(address => uint) internal balance;
  mapping(address => uint[]) public myCourse;
  mapping(address => bool) public inserted;
  address [] public keys;
  mapping(address => mapping(address=>bool)) public isPaid;
- event balanceAdded (uint amount, address indexed depositTo);
+ event BalanceAdded (uint amount, address indexed depositTo);
 
     constructor(address _courseAddress) {
         courseAddress = _courseAddress;
@@ -62,7 +62,7 @@ contract Cart is Courses{
         addMyCourse(msg.sender);
         isPaid [msg.sender][recipient] = true;
         clearCart();
-        emit transferSuccess(msg.sender, recipient, amount);
+        emit TransferSuccess(msg.sender, recipient, amount);
         return true;
 
     }
@@ -83,7 +83,7 @@ contract Cart is Courses{
 
     function deposit() public payable returns(uint){
         balance[msg.sender] += msg.value;
-        emit balanceAdded(msg.value, msg.sender);
+        emit BalanceAdded(msg.value, msg.sender);
         return balance[msg.sender];
     }    
 
@@ -102,11 +102,11 @@ contract Cart is Courses{
     }
 
     //return course id that student already paid, this course id can use for loop in other function
-    function getMyCourse() view public returns(uint[] memory){
+    function getMyCourse() public view returns(uint[] memory){
         return myCourse[msg.sender];
     }
 
-    function getAllStudents() view public returns(address [] memory){
+    function getAllStudents() public view returns(address [] memory){
         return keys;
     }
 

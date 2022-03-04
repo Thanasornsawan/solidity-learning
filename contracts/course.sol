@@ -15,7 +15,7 @@ error Low_Balance();
 error Invalid_Address();
 
 interface CourseInterface {
-    function getCourseById(uint index) view external returns(uint _ID, uint _price, string memory title);
+    function getCourseById(uint index) external view returns(uint _id, uint _price, string memory title);
 }
 
 contract Courses is Ownable{
@@ -26,12 +26,12 @@ contract Courses is Ownable{
       struct Course{
         uint price;
         string title;
-        uint256 _id;
+        uint256 id;
         bool exam;
     }
 
     mapping (uint => Course) public courses;
-    event transferSuccess (address indexed sender, address indexed reciever, uint amount);
+    event TransferSuccess (address indexed sender, address indexed reciever, uint amount);
 
     //calldata save gas more than memory
     function addCourse(uint _price, string calldata _title) public onlyOwner {
@@ -48,13 +48,13 @@ contract Courses is Ownable{
         return course;
     }
 
-    function getCourseById(uint index) view external returns(uint _ID, uint _price, string memory _title, bool _exam){
+    function getCourseById(uint index) external view returns(uint _id, uint _price, string memory _title, bool _exam){
         Course storage course = courses[index];
-        _ID = course._id;
+        _id = course.id;
         _price = course.price;
         _title = course.title;
         _exam = course.exam;
-        return (_ID, _price, _title, _exam);
+        return (_id, _price, _title, _exam);
     }
 
     function getAllCourses() public view returns (Course[] memory){
