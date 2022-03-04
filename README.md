@@ -1,5 +1,6 @@
 [![npm version](https://badge.fury.io/js/npm.svg)](https://badge.fury.io/js/npm)
 [![Solidity Learning](https://github.com/Thanasornsawan/solidity-learning/actions/workflows/workflow.yml/badge.svg)](https://github.com/Thanasornsawan/solidity-learning/actions/workflows/workflow.yml)
+[![Coverage Status](https://coveralls.io/repos/github/Thanasornsawan/solidity-learning/badge.svg)](https://coveralls.io/github/Thanasornsawan/solidity-learning)
 ![buidler](https://buidler.dev/buidler-plugin-badge.svg?1)
 
 # Solidity Learning
