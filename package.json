@@ -1,4 +1,13 @@
 {
+  "name": "solidity-learning",
+  "version": "1.0.0",
+  "description": "Solidity learning project",
+  "engines": {
+    "node": ">=16.10.0"
+  },
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
   "devDependencies": {
     "@nomiclabs/hardhat-ethers": "^2.0.5",
     "@nomiclabs/hardhat-truffle5": "^2.0.5",
@@ -7,12 +16,7 @@
     "@openzeppelin/contracts": "^4.5.0",
     "@openzeppelin/hardhat-upgrades": "^1.15.0",
     "@openzeppelin/test-helpers": "^0.5.15",
-    "bignumber.js": "^9.0.2",
-    "bn-chai": "^1.0.1",
     "chai": "^4.3.6",
-    "chai-as-promised": "^7.1.1",
-    "chai-bignumber": "^3.0.0",
-    "chai-bn": "^0.3.1",
     "coveralls": "^3.1.1",
     "deep-eql": "^4.0.1",
     "dotenv": "^16.0.0",
@@ -21,11 +25,8 @@
     "hardhat": "^2.9.0",
     "hardhat-gas-reporter": "^1.0.8",
     "hardhat-tracer": "^1.0.0-alpha.6",
-    "jest": "^27.5.1",
+    "solhint": "^3.3.7",
     "solidity-coverage": "^0.7.20",
     "web3": "^1.7.0"
-  },
-  "scripts" : {
-    "test" : "jest"
   }
 }

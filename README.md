@@ -47,6 +47,7 @@ npm install
   - [Usage](#usage)
     - [Running project with hardhat](#running-project-with-hardhat)
     - [Running the tests](#running-the-tests)
+    - [Running solhint validate all contract](#running-solhint-validate-all-contract)
   - [Todo on this project](#todo-on-this-project)
   - [Authors](#authors)
 
@@ -131,6 +132,16 @@ gasReporter: {
 ![gas result4](https://github.com/Thanasornsawan/solidity-learning/blob/dev/photos/testgas4.PNG?raw=true)
 
 You can view another solution of test.js by openzeppelin-testhelper from [here](https://github.com/Thanasornsawan/solidity-learning/tree/main/scripts/openzeppelin)
+
+### Running solhint validate all contract
+
+```shell
+solhint 'contracts/**/*.sol'
+```
+
+![solhint](https://github.com/Thanasornsawan/solidity-learning/blob/dev/photos/solhint.PNG?raw=true)
+
+* Edit rule in file `.solhint.json` see [detail](https://github.com/protofire/solhint/blob/master/docs/rules.md)
 
 ## Todo on this project
 
