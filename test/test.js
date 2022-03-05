@@ -20,7 +20,7 @@ const { deepEql } = require("deep-eql");
       await this.course.deployed();
       this.exam = await this.Exam.deploy();
       await this.exam.deployed();
-      this.cart = await this.Cart.deploy(this.course.address, this.exam.address);
+      this.cart = await this.Cart.deploy(this.course.address);
       await this.cart.deployed();
     });
 

@@ -9,7 +9,7 @@ const main = async () => {
     await examContract.deployed();
 
     const cartContractFactory = await hre.ethers.getContractFactory('Cart');
-    const cartContract = await cartContractFactory.deploy(courseContract.address,examContract.address);
+    const cartContract = await cartContractFactory.deploy(courseContract.address);
     await cartContract.deployed();
 
     console.log("Course contract deployed to:", courseContract.address);

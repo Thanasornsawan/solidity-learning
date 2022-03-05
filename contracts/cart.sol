@@ -2,17 +2,8 @@
 
 pragma solidity 0.8.9;
 
-import "./library.sol";
 import "./exam.sol";
-
-/*
-In this example, we define how to use function from other contract 2 methods
-1. public contract from other project in this case is "Course contract"
-when we want to use course function, we need to define interface as external
-2. other contract that we have in project in this case is "Exam contract"
-when we want to use function we need to import file and define contract address with variable
-ex. exam = Exam(_examAddress);
-*/
+import "./library.sol";
 
 interface CourseInterface {
     function getCourseById(uint index) external view returns(uint _id, uint _price, string memory title);
@@ -23,25 +14,23 @@ error Empty_Amount();
 error Low_Balance();
 error Invalid_Address();
 
-contract Cart {
- Exam public exam;
+contract Cart is Exam{
  uint[] public cart;  
  address public courseAddress; 
+ mapping(address => uint) public studentExam;
+ address [] public keys;
  mapping(address => uint) internal balance;
  mapping(address => uint[]) public myCourse;
  mapping(address => bool) public inserted;
- mapping(address => uint) public studentExam;
- address [] public keys;
  mapping(address => mapping(address=>bool)) public isPaid;
  event BalanceAdded (uint amount, address indexed depositTo);
+ event TransferSuccess (address indexed sender, address indexed reciever, uint amount);
  event FallbackLog(string func, address sender,uint value, bytes data);
  event ReceiveLog(uint amount, uint gas);
- event TransferSuccess (address indexed sender, address indexed reciever, uint amount);
 
-    constructor(address _courseAddress, address _examAddress) {
-        courseAddress = _courseAddress;
-        exam = Exam(_examAddress);
-    }
+constructor(address _courseAddress) {
+    courseAddress = _courseAddress; 
+}
 
     function chooseCoursesToBuy(uint index) public returns (uint[] memory){
         cart.push(index); //put id of course
@@ -57,11 +46,6 @@ contract Cart {
         //solidity cannot use "delete cart[1]" because array lenght not change from immutable
         cart[index] = cart[cart.length - 1];
         cart.pop();
-        return cart;
-    }
-
-    function clearCart() public returns (uint[] memory) {
-        delete cart;
         return cart;
     }
 
@@ -89,6 +73,11 @@ contract Cart {
         clearCart();
         emit TransferSuccess(msg.sender, recipient, amount);
         return true;
+    }
+
+    function clearCart() public returns (uint[] memory) {
+        delete cart;
+        return cart;
     }
 
     function _transfer(address from, address to, uint amount) private {
@@ -145,15 +134,15 @@ contract Cart {
     }
 
     function registerExam() public {
-        studentExam[msg.sender] = exam.getDefaultStatus();
+        studentExam[msg.sender] = getDefaultStatus();
     }
 
     function registerRetakeExam() public {
-        studentExam[msg.sender] = exam.setReTest();
+        studentExam[msg.sender] = setReTest();
     }
 
     function completeExam() private {
-        studentExam[msg.sender] = exam.setComplete();
+        studentExam[msg.sender] = setComplete();
     }
 
     function getStatusExam() public view returns(uint){
