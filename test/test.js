@@ -3,6 +3,10 @@ const { ethers } = require("hardhat");
 const { deepEql } = require("deep-eql");
 
   describe("Course and Cart contract", function () {
+    let owner;
+    let addr1;
+    let addr2;
+    let addrs;
     
     before(async function () {
       this.Course = await hre.ethers.getContractFactory('Courses');
@@ -10,6 +14,7 @@ const { deepEql } = require("deep-eql");
     });
   
     beforeEach(async function () {
+      [owner, addr1, addr2, ...addrs] = await ethers.getSigners();
       this.course = await this.Course.deploy();
       await this.course.deployed();
       this.cart = await this.Cart.deploy(this.course.address);
@@ -45,7 +50,4 @@ const { deepEql } = require("deep-eql");
         expect(totalPrice).to.be.not.equal(zero);
         expect(totalPrice).to.equal(expected);
       });
-
-  });
-  
-
+});

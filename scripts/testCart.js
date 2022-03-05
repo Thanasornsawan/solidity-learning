@@ -63,17 +63,6 @@ const main = async () => {
     const getStdBalance2 = await cartContract.connect(std1).getBalance();
     console.log("student balance after payment: " + getStdBalance2.toString());
 
-     //test method deposit involve with msg.value --------------------------------
-    const depositToOwner = await cartContract.deposit({
-        from: owner.address,
-        value: ethers.utils.parseUnits("100","wei")
-    });
-
-    let getOwnerBalance2 = await cartContract.getBalance();
-      getOwnerBalance2 = ethers.utils.parseUnits(getOwnerBalance2.toString(),"wei");
-      console.log("Teacher balance after deposit: " + getOwnerBalance2);
-    //----------------------------------------------------------------------------
-
     const getMyCourse = await cartContract.connect(std1).getMyCourse();
     console.log("My course ID: "+ getMyCourse.toString());
 
@@ -85,6 +74,17 @@ const main = async () => {
     const testExamStatus = await examContract.setComplete();
     const getExamStatus = await examContract.getExamStatus();
     console.log(getExamStatus);
+
+    const depositContract = await cartContract.depositContract({
+        from: owner.address,
+        value: ethers.utils.parseUnits("50","wei")
+    });
+    console.log("Total contract balance :" + depositContract.value.toString());
+
+    let getOwnerBalance2 = await cartContract.getBalance();
+      getOwnerBalance2 = ethers.utils.parseUnits(getOwnerBalance2.toString(),"wei");
+      console.log("Teacher balance after deposit contract: " + getOwnerBalance2);
+
 };
 
 const runMain = async () => {

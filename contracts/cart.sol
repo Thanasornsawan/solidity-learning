@@ -3,6 +3,7 @@
 pragma solidity 0.8.9;
 
 import "./course.sol";
+import "./library.sol";
 
 contract Cart is Courses{
  uint[] public cart;  
@@ -13,6 +14,8 @@ contract Cart is Courses{
  address [] public keys;
  mapping(address => mapping(address=>bool)) public isPaid;
  event BalanceAdded (uint amount, address indexed depositTo);
+ event FallbackLog(string func, address sender,uint value, bytes data);
+ event ReceiveLog(uint amount, uint gas);
 
     constructor(address _courseAddress) {
         courseAddress = _courseAddress;
@@ -64,7 +67,6 @@ contract Cart is Courses{
         clearCart();
         emit TransferSuccess(msg.sender, recipient, amount);
         return true;
-
     }
 
     function _transfer(address from, address to, uint amount) private {
@@ -74,6 +76,7 @@ contract Cart is Courses{
 
     function addBalance(uint _toAdd) public returns(uint){
         balance[msg.sender] = balance[msg.sender] + _toAdd;
+        emit BalanceAdded(_toAdd, msg.sender);
         return balance[msg.sender];
     }
 
@@ -81,11 +84,11 @@ contract Cart is Courses{
         return balance[msg.sender];
     }
 
-    function deposit() public payable returns(uint){
-        balance[msg.sender] += msg.value;
-        emit BalanceAdded(msg.value, msg.sender);
-        return balance[msg.sender];
-    }    
+    function depositContract() public payable returns(uint){
+        balance[address(this)] += msg.value;
+        balance[msg.sender] -= msg.value;
+        return Finance.getBalanceContract();
+    }  
 
     function getStatusPaid(address receiver) public view returns(bool) {
         return isPaid[msg.sender][receiver];
@@ -108,6 +111,15 @@ contract Cart is Courses{
 
     function getAllStudents() public view returns(address [] memory){
         return keys;
+    }
+
+    //when somebody try to call non-exist function and sent ether to this contract
+    fallback() external payable {
+        emit FallbackLog("fallback", msg.sender, msg.value, msg.data);
+    }
+    //when somebody sent money + empty data to contract
+    receive() external payable {
+        emit ReceiveLog(msg.value, gasleft());
     }
 
 }
