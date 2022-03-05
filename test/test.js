@@ -11,13 +11,16 @@ const { deepEql } = require("deep-eql");
     before(async function () {
       this.Course = await hre.ethers.getContractFactory('Courses');
       this.Cart = await hre.ethers.getContractFactory('Cart');
+      this.Exam = await hre.ethers.getContractFactory('Exam');
     });
   
     beforeEach(async function () {
       [owner, addr1, addr2, ...addrs] = await ethers.getSigners();
       this.course = await this.Course.deploy();
       await this.course.deployed();
-      this.cart = await this.Cart.deploy(this.course.address);
+      this.exam = await this.Exam.deploy();
+      await this.exam.deployed();
+      this.cart = await this.Cart.deploy(this.course.address, this.exam.address);
       await this.cart.deployed();
     });
 
