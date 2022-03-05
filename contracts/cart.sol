@@ -2,23 +2,45 @@
 
 pragma solidity 0.8.9;
 
-import "./course.sol";
 import "./library.sol";
+import "./exam.sol";
 
-contract Cart is Courses{
+/*
+In this example, we define how to use function from other contract 2 methods
+1. public contract from other project in this case is "Course contract"
+when we want to use course function, we need to define interface as external
+2. other contract that we have in project in this case is "Exam contract"
+when we want to use function we need to import file and define contract address with variable
+ex. exam = Exam(_examAddress);
+*/
+
+interface CourseInterface {
+    function getCourseById(uint index) external view returns(uint _id, uint _price, string memory title);
+}
+
+error No_Recipient();
+error Empty_Amount();
+error Low_Balance();
+error Invalid_Address();
+
+contract Cart {
+ Exam public exam;
  uint[] public cart;  
  address public courseAddress; 
  mapping(address => uint) internal balance;
  mapping(address => uint[]) public myCourse;
  mapping(address => bool) public inserted;
+ mapping(address => uint) public studentExam;
  address [] public keys;
  mapping(address => mapping(address=>bool)) public isPaid;
  event BalanceAdded (uint amount, address indexed depositTo);
  event FallbackLog(string func, address sender,uint value, bytes data);
  event ReceiveLog(uint amount, uint gas);
+ event TransferSuccess (address indexed sender, address indexed reciever, uint amount);
 
-    constructor(address _courseAddress) {
+    constructor(address _courseAddress, address _examAddress) {
         courseAddress = _courseAddress;
+        exam = Exam(_examAddress);
     }
 
     function chooseCoursesToBuy(uint index) public returns (uint[] memory){
@@ -120,6 +142,22 @@ contract Cart is Courses{
     //when somebody sent money + empty data to contract
     receive() external payable {
         emit ReceiveLog(msg.value, gasleft());
+    }
+
+    function registerExam() public {
+        studentExam[msg.sender] = exam.getDefaultStatus();
+    }
+
+    function registerRetakeExam() public {
+        studentExam[msg.sender] = exam.setReTest();
+    }
+
+    function completeExam() private {
+        studentExam[msg.sender] = exam.setComplete();
+    }
+
+    function getStatusExam() public view returns(uint){
+        return studentExam[msg.sender];
     }
 
 }

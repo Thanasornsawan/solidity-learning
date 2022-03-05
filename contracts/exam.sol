@@ -9,13 +9,15 @@ contract Exam {
    ExamStatus public constant DEFAULT_STATUS = ExamStatus.waiting;
 
     //status =1
-   function setReTest() public {
+   function setReTest() public returns(uint) {
       status = ExamStatus.retest;
+      return uint(status);
    }
 
     //status =2
-    function setComplete() public {
+    function setComplete() public returns(uint){
       status = ExamStatus.complete;
+      return uint(status);
    }
 
    function getExamStatus() public view returns (ExamStatus) {

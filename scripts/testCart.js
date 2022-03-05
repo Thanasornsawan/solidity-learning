@@ -4,13 +4,13 @@ const main = async () => {
     const courseContract = await courseContractFactory.deploy();
     await courseContract.deployed();
 
-    const cartContractFactory = await hre.ethers.getContractFactory('Cart');
-    const cartContract = await cartContractFactory.deploy(courseContract.address);
-    await cartContract.deployed();
-
     const examContractFactory = await hre.ethers.getContractFactory('Exam');
     const examContract = await examContractFactory.deploy();
     await examContract.deployed();
+
+    const cartContractFactory = await hre.ethers.getContractFactory('Cart');
+    const cartContract = await cartContractFactory.deploy(courseContract.address,examContract.address);
+    await cartContract.deployed();
 
     console.log("Course contract deployed to:", courseContract.address);
     console.log("Cart contract deployed to:", cartContract.address);
@@ -71,9 +71,6 @@ const main = async () => {
     console.log(getAllStudent);
 
     //-----------------------------------------------------------------------------
-    const testExamStatus = await examContract.setComplete();
-    const getExamStatus = await examContract.getExamStatus();
-    console.log(getExamStatus);
 
     const depositContract = await cartContract.depositContract({
         from: owner.address,
@@ -84,6 +81,13 @@ const main = async () => {
     let getOwnerBalance2 = await cartContract.getBalance();
       getOwnerBalance2 = ethers.utils.parseUnits(getOwnerBalance2.toString(),"wei");
       console.log("Teacher balance after deposit contract: " + getOwnerBalance2);
+
+    //----- test exam contract integrate with cart contract --
+    const retakeExam = await cartContract.registerRetakeExam();
+    const checkStatusExam = await cartContract.getStatusExam();
+    const convert = checkStatusExam.toString();
+    if (convert=="1") {console.log("status = Retake")} 
+    else if(convert=="0") {console.log("status = Waiting")} else {console.log("status = Complete")}
 
 };
 

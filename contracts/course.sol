@@ -9,15 +9,6 @@ import "hardhat/console.sol";
 //import "https://github.com/OpenZeppelin/openzeppelin-contracts/blob/master/contracts/utils/Counters.sol";
 //import "https://github.com/OpenZeppelin/openzeppelin-contracts/blob/master/contracts/access/Ownable.sol";
 
-error No_Recipient();
-error Empty_Amount();
-error Low_Balance();
-error Invalid_Address();
-
-interface CourseInterface {
-    function getCourseById(uint index) external view returns(uint _id, uint _price, string memory title);
-}
-
 contract Courses is Ownable{
     
     using Counters for Counters.Counter;
@@ -31,7 +22,6 @@ contract Courses is Ownable{
     }
 
     mapping (uint => Course) public courses;
-    event TransferSuccess (address indexed sender, address indexed reciever, uint amount);
 
     //calldata save gas more than memory
     function addCourse(uint _price, string calldata _title) public onlyOwner {
