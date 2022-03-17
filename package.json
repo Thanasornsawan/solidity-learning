@@ -26,7 +26,6 @@
     "hardhat-gas-reporter": "^1.0.8",
     "hardhat-tracer": "^1.0.0-alpha.6",
     "solhint": "^3.3.7",
-    "solidity-coverage": "^0.7.20",
-    "web3": "^1.7.0"
+    "solidity-coverage": "^0.7.20"
   }
 }

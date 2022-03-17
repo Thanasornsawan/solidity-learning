@@ -1,0 +1,29 @@
+#select the mode to test, which can be property, assertion, overflow, exploration, optimization
+testMode: "property"
+#prefix is the prefix for Boolean functions that are properties to be checked
+prefix: "echidna_"
+#propMaxGas defines gas cost at which a property fails
+propMaxGas: 8000030
+#testMaxGas is a gas limit; does not cause failure, but terminates sequence
+testMaxGas: 8000030
+#maxGasprice is the maximum gas price
+maxGasprice: 0
+#testLimit is the number of test sequences to run
+testLimit: 50000
+#stopOnFail makes echidna terminate as soon as any property fails and has been shrunk
+stopOnFail: false
+#estimateGas makes echidna perform analysis of maximum gas costs for functions (experimental)
+estimateGas: false
+#seqLen defines how many transactions are in a test sequence
+seqLen: 100
+#shrinkLimit determines how much effort is spent shrinking failing sequences
+shrinkLimit: 5000
+#coverage controls coverage guided testing
+coverage: false
+#format can be "text" or "json" for different output (human or machine readable)
+format: "text"
+cryticArgs: # If we add more dependencies they will need to be added as symlinks here!
+  [
+    "--solc-remap",
+    "@openzeppelin=node_modules/@openzeppelin/ hardhat=node_modules/hardhat/",
+  ]

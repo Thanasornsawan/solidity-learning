@@ -49,6 +49,12 @@ npm install
     - [Running project with hardhat](#running-project-with-hardhat)
     - [Running hardhat test](#running-hardhat-test)
     - [Running solhint validate all contracts](#running-solhint-validate-all-contracts)
+  - [Security testing tools](#security-testing-tools)
+    - [Running slither to check vulnerability on this project](#running-slither-to-check-vulnerability-on-this-project)
+    - [Setup echidna-testing on this project](#setup-echidna-testing-on-this-project)
+    - [Before running echidna, you must write echidna function testing fuzzing in contract](#before-running-echidna-you-must-write-echidna-function-testing-fuzzing-in-contract)
+    - [Running echidna on this project](#running-echidna-on-this-project)
+    - [Running echidna with config file](#running-echidna-with-config-file)
   - [Todo on this project](#todo-on-this-project)
   - [Authors](#authors)
 
@@ -143,6 +149,53 @@ solhint 'contracts/**/*.sol'
 ![solhint](https://github.com/Thanasornsawan/solidity-learning/blob/main/photos/solhint.PNG?raw=true)
 
 * Edit rule in file `.solhint.json` see [detail](https://github.com/protofire/solhint/blob/master/docs/rules.md)
+
+## Security testing tools
+>I use wsl linux ubuntu on windows because some tools not works on windows rigth now.The path to windows is /mnt
+
+### Running slither to check vulnerability on this project
+
+```shell
+slither contracts/cart.sol --solc-remap "@openzeppelin=./node_modules/@openzeppelin"
+```
+
+![slither1](https://github.com/Thanasornsawan/solidity-learning/blob/main/photos/slither1.PNG?raw=true)
+
+### Setup echidna-testing on this project
+You can check new version form https://github.com/crytic/echidna/releases
+
+```shell
+wget https://github.com/crytic/echidna/releases/download/v2.0.0/echidna-test-2.0.0-Ubuntu-18.04.tar.gz
+sudo tar xzvf echidna-test-2.0.0-Ubuntu-18.04.tar.gz
+sudo ln -s /mnt/c/Users/Ploy/Documents/echidna-test /usr/local/bin/echidna-test
+chmod +x /mnt/c/Users/Ploy/Documents/echidna-test
+```
+
+### Before running echidna, you must write echidna function testing fuzzing in contract
+Echidna properties are Solidity functions.A property must:
+Have no argument
+Return true if it is successful
+Have its name starting with echidna
+refer from ![building-secure-contracts](https://github.com/crytic/building-secure-contracts/blob/master/program-analysis/echidna/how-to-test-a-property.md#write-a-property)
+
+### Running echidna on this project
+
+```shell
+echidna-test contracts/course.sol --crytic-args "--solc-remap @openzeppelin=./node_modules/@openzeppelin"
+```
+
+### Running echidna with config file
+
+```shell
+echidna-test ./ --contract Courses --config echidna-config.yaml
+```
+
+Result may return
+```shell
+Analyzing contract: /mnt/c/Users/Ploy/Documents/moralis/solidity/solidity-learning/contracts/course.sol:Courses
+echidna-test: No tests found in ABI
+```
+Because currently,I still didn't make any function for echidna to test
 
 ## Todo on this project
 
