@@ -162,7 +162,7 @@ slither contracts/cart.sol --solc-remap "@openzeppelin=./node_modules/@openzeppe
 ![slither1](https://github.com/Thanasornsawan/solidity-learning/blob/main/photos/slither1.PNG?raw=true)
 
 ### Setup echidna-testing on this project
-You can check new version form https://github.com/crytic/echidna/releases
+You can check new version from https://github.com/crytic/echidna/releases
 
 ```shell
 wget https://github.com/crytic/echidna/releases/download/v2.0.0/echidna-test-2.0.0-Ubuntu-18.04.tar.gz
@@ -176,7 +176,7 @@ Echidna properties are Solidity functions.A property must:
 Have no argument
 Return true if it is successful
 Have its name starting with echidna
-refer from ![building-secure-contracts](https://github.com/crytic/building-secure-contracts/blob/master/program-analysis/echidna/how-to-test-a-property.md#write-a-property)
+refer from [building-secure-contracts](https://github.com/crytic/building-secure-contracts/blob/master/program-analysis/echidna/how-to-test-a-property.md#write-a-property)
 
 ### Running echidna on this project
 
