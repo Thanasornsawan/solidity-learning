@@ -55,7 +55,6 @@ npm install
     - [Before running echidna, you must write echidna function testing fuzzing in contract](#before-running-echidna-you-must-write-echidna-function-testing-fuzzing-in-contract)
     - [Running echidna on this project](#running-echidna-on-this-project)
     - [Running echidna with config file](#running-echidna-with-config-file)
-  - [Todo on this project](#todo-on-this-project)
   - [Authors](#authors)
 
 ## Getting Started
@@ -196,16 +195,6 @@ Analyzing contract: /mnt/c/Users/Ploy/Documents/moralis/solidity/solidity-learni
 echidna-test: No tests found in ABI
 ```
 Because currently,I still didn't make any function for echidna to test
-
-## Todo on this project
-
-- [ ] Integrate course contract with exam contract
-- [ ] Mapping status exam with students
-- [ ] Make the proxy contract for deploy on test network
-- [ ] Host NFT on IPFS
-- [ ] Giveaway NFT to students who complete course
-- [ ] Random giveaway ERC-20 token to students who pass exam
-- [ ] Integrate exam topic from any api chainlink oracle 
 
 ## Authors
 

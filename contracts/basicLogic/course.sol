@@ -4,7 +4,10 @@ pragma solidity 0.8.9;
 pragma experimental ABIEncoderV2;
 import "@openzeppelin/contracts/utils/Counters.sol";
 import "@openzeppelin/contracts/access/Ownable.sol";
-import "hardhat/console.sol";
+//Use this import if security tool not found plugin
+//import "../node_modules/@openzeppelin/contracts/access/Ownable.sol";
+//import "../node_modules/@openzeppelin/contracts/utils/Counters.sol";
+//import "hardhat/console.sol";
 //use this import when run on remix instread of import from openzeppelin plug in
 //import "https://github.com/OpenZeppelin/openzeppelin-contracts/blob/master/contracts/utils/Counters.sol";
 //import "https://github.com/OpenZeppelin/openzeppelin-contracts/blob/master/contracts/access/Ownable.sol";
