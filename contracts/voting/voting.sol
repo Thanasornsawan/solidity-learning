@@ -4,7 +4,7 @@ agree->voted:true, not agree->voted:false and everyone need to have rights to vo
 from the owner (ballotOfficialAddress), the owner will need to add voter address one by one.
 and everyone and rights to vote just once.
 */
-pragma solidity >= 0.7.0 < 0.9.0;
+pragma solidity 0.8.9;
 
 contract Ballot {
     struct vote {
