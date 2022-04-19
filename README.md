@@ -8,7 +8,7 @@
 You will learn about struct, array, map, inherit, custom error and so on from this project.
 
 ```markdown
-/contracts
+/contracts/MyPractice
 	course.sol
 	cart.sol
   	exam.sol
