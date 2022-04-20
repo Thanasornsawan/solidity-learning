@@ -6,6 +6,7 @@ require("hardhat-gas-reporter");
 //require("@nomiclabs/hardhat-truffle5");
 //There's no need for require("@nomiclabs/hardhat-ethers"), as @nomiclabs/hardhat-waffle already does it.
 require('@openzeppelin/hardhat-upgrades');
+require("@nomiclabs/hardhat-etherscan");
 require("dotenv").config();
 
 /**

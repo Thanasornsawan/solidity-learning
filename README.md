@@ -49,6 +49,7 @@ npm install
     - [Running project with hardhat](#running-project-with-hardhat)
     - [Running hardhat test](#running-hardhat-test)
     - [Running solhint validate all contracts](#running-solhint-validate-all-contracts)
+    - [Deploy and Verify upgrade contract on rinkeby](#deploy-and-verify-upgrade-contract-on-rinkeby)
   - [Security testing tools](#security-testing-tools)
     - [Running slither to check vulnerability on this project](#running-slither-to-check-vulnerability-on-this-project)
     - [Setup echidna-testing on this project](#setup-echidna-testing-on-this-project)
@@ -148,6 +149,53 @@ solhint 'contracts/**/*.sol'
 ![solhint](https://github.com/Thanasornsawan/solidity-learning/blob/main/photos/solhint.PNG?raw=true)
 
 * Edit rule in file `.solhint.json` see [detail](https://github.com/protofire/solhint/blob/master/docs/rules.md)
+
+### Deploy and Verify upgrade contract on rinkeby
+
+Deploy contract and proxy on rinkeby
+```shell
+PS C:\Users\Ploy\Documents\moralis\solidity\solidity-learning> npx hardhat .\scripts\deployProxy.js --network rinkeby
+Compiled 2 Solidity files successfully
+Deploying Proxy...
+proxy address:  0x61509bda0A25247a3AFa430DC8d25601038fDecb
+```
+
+Verify the implementation contract on rinkeby
+```shell
+PS C:\Users\Ploy\Documents\moralis\solidity\solidity-learning>npx hardhat verify --network rinkeby 0x086da8f8f4fdbbebe41e08793a47335b300ee21b
+Nothing to compile
+Successfully submitted source code for contract
+contracts/upgrade/MyTokenUpgradeable.sol:MyTokenProxy at 0x086da8f8f4fdbbebe41e08793a47335b300ee21b
+for verification on the block explorer. Waiting for verification result...
+
+Successfully verified contract MyTokenProxy on Etherscan.
+https://rinkeby.etherscan.io/address/0x086da8f8f4fdbbebe41e08793a47335b300ee21b#code
+```
+
+Verify the proxy contract that it is proxy on etherscan<br/>
+Click tab 'Contract' > 'More Options' > 'Is this a proxy?" > click 'verify' button.
+![verify](https://github.com/Thanasornsawan/solidity-learning/blob/dev/photos/verify.JPG?raw=true)
+
+Make new version of contract and re-deploy to the same proxy address
+```shell
+PS C:\Users\Ploy\Documents\moralis\solidity\solidity-learning> npx hardhat run .\scripts\upgradeProxy.js --network rinkeby       
+Upgrading Proxy...
+proxy upgrade successfully
+```
+
+Verify the implementation contract on rinkeby
+```shell
+PS C:\Users\Ploy\Documents\moralis\solidity\solidity-learning> npx hardhat verify --network rinkeby 0x83797E6727A9C470aA46e72Ed07cf466d58EFdfA
+Nothing to compile
+Successfully submitted source code for contract
+contracts/upgrade/MyTokenImplementation.sol:MyTokenImplementation at 0x83797E6727A9C470aA46e72Ed07cf466d58EFdfA
+for verification on the block explorer. Waiting for verification result...
+
+Successfully verified contract MyTokenImplementation on Etherscan.
+https://rinkeby.etherscan.io/address/0x83797E6727A9C470aA46e72Ed07cf466d58EFdfA#code
+```
+
+![transaction](https://github.com/Thanasornsawan/solidity-learning/blob/dev/photos/transaction.JPG?raw=true)
 
 ## Security testing tools
 >I use wsl linux ubuntu on windows because some tools not works on windows rigth now.The path to windows is /mnt
