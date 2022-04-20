@@ -159,6 +159,7 @@ Compiled 2 Solidity files successfully
 Deploying Proxy...
 proxy address:  0x61509bda0A25247a3AFa430DC8d25601038fDecb
 ```
+** check contract address on etherscan found address 0x086da8f8f4fdbbebe41e08793a47335b300ee21b
 
 Verify the implementation contract on rinkeby
 ```shell
@@ -174,6 +175,8 @@ https://rinkeby.etherscan.io/address/0x086da8f8f4fdbbebe41e08793a47335b300ee21b#
 
 Verify the proxy contract that it is proxy on etherscan<br/>
 Click tab 'Contract' > 'More Options' > 'Is this a proxy?" > click 'verify' button.
+![verify2](https://github.com/Thanasornsawan/solidity-learning/blob/dev/photos/verify2.JPG?raw=true)
+
 ![verify](https://github.com/Thanasornsawan/solidity-learning/blob/dev/photos/verify.JPG?raw=true)
 
 Make new version of contract and re-deploy to the same proxy address
@@ -196,6 +199,8 @@ https://rinkeby.etherscan.io/address/0x83797E6727A9C470aA46e72Ed07cf466d58EFdfA#
 ```
 
 ![transaction](https://github.com/Thanasornsawan/solidity-learning/blob/dev/photos/transaction.JPG?raw=true)
+
+The new implementation contract show method "Upgrade To" the same proxy address 0x61509bda0A25247a3AFa430DC8d25601038fDecb
 
 ## Security testing tools
 >I use wsl linux ubuntu on windows because some tools not works on windows rigth now.The path to windows is /mnt
