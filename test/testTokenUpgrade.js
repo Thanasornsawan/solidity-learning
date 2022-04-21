@@ -23,7 +23,7 @@ const { ethers } = require("hardhat");
             assert(await proxy.symbol()==="PLY");
 
             const tokenV2 = await hre.upgrades.upgradeProxy(proxy, this.MyTokenImplementation);
-            assert(await tokenV2.version()==="v2!");
+            assert(await tokenV2.version()==="version 3!");
             console.log("Area: ", (await tokenV2.area()).toString());
         });
 
