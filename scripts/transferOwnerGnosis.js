@@ -1,7 +1,7 @@
 async function main () {
-    const gnosisSafe = '0x07F6310dD5bA6f545b1517F3fFf93B0E4C904401';
+    const gnosisSafe = '0x07F6310dD5bA6f545b1517F3fFf93B0E4C904401'; // Your Gnosis Safe address here
     const MyTokenProxy = await hre.ethers.getContractFactory('MyTokenProxy');
-    const contract = MyTokenProxy.attach('0x61509bda0A25247a3AFa430DC8d25601038fDecb');
+    const contract = MyTokenProxy.attach('0x61509bda0A25247a3AFa430DC8d25601038fDecb'); //Your deployed proxy address
 
     console.log("Previous owner:", await contract.owner());
     const tx = await contract.transferOwnership(gnosisSafe);

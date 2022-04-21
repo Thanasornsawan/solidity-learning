@@ -10,7 +10,7 @@ async function main() {
     description: "upgrade contact via genosis safe in openzeppelin defender",
     multisig: '0x07F6310dD5bA6f545b1517F3fFf93B0E4C904401', // Your Gnosis Safe address here
     multisigType: 'Gnosis Safe',
-    title: "Upgrading via a multisig gnosis",
+    title: "Upgrading via a multisig gnosis v3",
   });
   console.log("Upgrade proposal created at:", proposal.url);
 }

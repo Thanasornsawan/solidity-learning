@@ -5,7 +5,7 @@ import "./MyTokenUpgradeable.sol";
 
 contract MyTokenImplementation is MyTokenProxy {
     function version() public pure returns (string memory) {
-        return "v2!";
+        return "version 3!";
     }
 
     function area() public view returns(uint) {

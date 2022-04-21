@@ -212,6 +212,7 @@ Fill contact detail and owner address and then click "Create Gnosis Safe"
 ![choose2](https://github.com/Thanasornsawan/solidity-learning/blob/dev/photos/g1.JPG?raw=true)
 
 Put the Gnosis contract address in the script to change owner
+![owner](https://github.com/Thanasornsawan/solidity-learning/blob/dev/photos/scriptOwner.JPG?raw=true)
 
 ```shell
 PS C:\Users\Ploy\Documents\moralis\solidity\solidity-learning> npx hardhat run .\scripts\transferOwnerGnosis.js --network rinkeby
@@ -223,6 +224,8 @@ Transferred ownership of ProxyAdmin to: 0x07F6310dD5bA6f545b1517F3fFf93B0E4C9044
 ```
 
 Upgrade proxy contract to openzeppelin defender
+![defend](https://github.com/Thanasornsawan/solidity-learning/blob/dev/photos/defend.JPG?raw=true)
+
 ```shell
 PS C:\Users\Ploy\Documents\moralis\solidity\solidity-learning> npx hardhat run .\scripts\upgradeDefender.js --network rinkeby
 Preparing proposal...
@@ -244,8 +247,14 @@ Click 'Execute' to process the upgrade contract
 Final result
 ![approve4](https://github.com/Thanasornsawan/solidity-learning/blob/dev/photos/approve4.JPG?raw=true)
 
-You can check all transaction that you do with ypur proxy contract here
+You can check all transaction that you do with your proxy contract here
 ![approve5](https://github.com/Thanasornsawan/solidity-learning/blob/dev/photos/approve5.JPG?raw=true)
+
+After click icon 'view in block explorer' nearby address of proxy contract, you will see your proxy changed
+![approve6](https://github.com/Thanasornsawan/solidity-learning/blob/dev/photos/approve6.JPG?raw=true)
+
+You can change policy of maximum people to approve proposal on [Gnosis website](https://gnosis-safe.io/)
+![approve7](https://github.com/Thanasornsawan/solidity-learning/blob/dev/photos/approve7.JPG?raw=true)
 
 ## Security testing tools
 >I use wsl linux ubuntu on windows because some tools not works on windows rigth now.The path to windows is /mnt
