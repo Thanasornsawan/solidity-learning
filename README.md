@@ -50,6 +50,7 @@ npm install
     - [Running hardhat test](#running-hardhat-test)
     - [Running solhint validate all contracts](#running-solhint-validate-all-contracts)
     - [Deploy and Verify upgrade contract on rinkeby](#deploy-and-verify-upgrade-contract-on-rinkeby)
+    - [Transfer ownership proxy contract to Gnosis contract](#transfer-ownership-proxy-contract-to-gnosis-contract)
   - [Security testing tools](#security-testing-tools)
     - [Running slither to check vulnerability on this project](#running-slither-to-check-vulnerability-on-this-project)
     - [Setup echidna-testing on this project](#setup-echidna-testing-on-this-project)
@@ -201,6 +202,50 @@ https://rinkeby.etherscan.io/address/0x83797E6727A9C470aA46e72Ed07cf466d58EFdfA#
 ![transaction](https://github.com/Thanasornsawan/solidity-learning/blob/dev/photos/transaction.JPG?raw=true)
 
 The new implementation contract show method "Upgrade To" the same proxy address 0x61509bda0A25247a3AFa430DC8d25601038fDecb
+
+### Transfer ownership proxy contract to Gnosis contract
+
+Get the Gnosis contract via openzeppelin defender
+![choose](https://github.com/Thanasornsawan/solidity-learning/blob/dev/photos/g2.JPG?raw=true)
+
+Fill contact detail and owner address and then click "Create Gnosis Safe"
+![choose2](https://github.com/Thanasornsawan/solidity-learning/blob/dev/photos/g1.JPG?raw=true)
+
+Put the Gnosis contract address in the script to change owner
+
+```shell
+PS C:\Users\Ploy\Documents\moralis\solidity\solidity-learning> npx hardhat run .\scripts\transferOwnerGnosis.js --network rinkeby
+
+Previous owner: 0x176366cFD97885245fAEA72f8cB6951e52655Adf
+Transferring ownership of ProxyAdmin...
+New owner: 0x07F6310dD5bA6f545b1517F3fFf93B0E4C904401
+Transferred ownership of ProxyAdmin to: 0x07F6310dD5bA6f545b1517F3fFf93B0E4C904401
+```
+
+Upgrade proxy contract to openzeppelin defender
+```shell
+PS C:\Users\Ploy\Documents\moralis\solidity\solidity-learning> npx hardhat run .\scripts\upgradeDefender.js --network rinkeby
+Preparing proposal...
+Upgrade proposal created at: https://defender.openzeppelin.com/#/admin/contracts/rinkeby-0x61509bda0A25247a3AFa430DC8d25601038fDecb/proposals/859f1761-3f31-450b-bfba-911501f9a438
+```
+
+You can view your proposal at admin panel here and click 'View propasal'
+![admin](https://github.com/Thanasornsawan/solidity-learning/blob/dev/photos/after.JPG?raw=true)
+
+Click 'approve'
+![approve](https://github.com/Thanasornsawan/solidity-learning/blob/dev/photos/approve.JPG?raw=true)
+
+Sign transaction with metamask from one of owner in Gnosis account
+![approve2](https://github.com/Thanasornsawan/solidity-learning/blob/dev/photos/approve2.JPG?raw=true)
+
+Click 'Execute' to process the upgrade contract
+![approve3](https://github.com/Thanasornsawan/solidity-learning/blob/dev/photos/approve3.JPG?raw=true)
+
+Final result
+![approve4](https://github.com/Thanasornsawan/solidity-learning/blob/dev/photos/approve4.JPG?raw=true)
+
+You can check all transaction that you do with ypur proxy contract here
+![approve5](https://github.com/Thanasornsawan/solidity-learning/blob/dev/photos/approve5.JPG?raw=true)
 
 ## Security testing tools
 >I use wsl linux ubuntu on windows because some tools not works on windows rigth now.The path to windows is /mnt

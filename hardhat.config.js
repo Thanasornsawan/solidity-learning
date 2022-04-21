@@ -7,6 +7,7 @@ require("hardhat-gas-reporter");
 //There's no need for require("@nomiclabs/hardhat-ethers"), as @nomiclabs/hardhat-waffle already does it.
 require('@openzeppelin/hardhat-upgrades');
 require("@nomiclabs/hardhat-etherscan");
+require("@openzeppelin/hardhat-defender");
 require("dotenv").config();
 
 /**
@@ -21,8 +22,6 @@ module.exports = {
     },
   },
   etherscan: {
-    // Your API key for Etherscan
-    // Obtain one at https://etherscan.io/
     apiKey: process.env.ETHERSCAN_KEY || ""
   },
   gasReporter: {
@@ -30,5 +29,9 @@ module.exports = {
     currency: "USD",
     coinmarketcap: process.env.COINMARKETCAP_API_KEY,
     excludeContracts: ["contracts/mocks/", "contracts/libraries/"],
+  },
+  defender: {
+    apiKey: process.env.DEFENDER_TEAM_API_KEY || "",
+    apiSecret: process.env.DEFENDER_TEAM_API_SECRET_KEY || "",
   }
 };
